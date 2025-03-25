@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 import { PrismaClient } from '@prisma/client';
 
 // Add prisma to the global type

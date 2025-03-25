@@ -5,11 +5,12 @@ import { prisma } from '@/lib/db';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     // Get movie ID from path
-    const movieId = parseInt(params.id, 10);
+    const movieId = parseInt(id, 10);
     
     if (isNaN(movieId)) {
       return NextResponse.json(

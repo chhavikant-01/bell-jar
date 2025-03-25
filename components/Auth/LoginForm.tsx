@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
@@ -157,7 +158,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onToggleForm })
             onClick={onToggleForm}
             className="text-sm text-pink-600 dark:text-pink-400 hover:underline"
           >
-            Don't have an account? Sign up
+            Don&apos;t have an account? Sign up
           </button>
         </div>
       </form>

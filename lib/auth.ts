@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { prisma } from './db';
@@ -24,7 +25,7 @@ export const comparePassword = async (
 // Generate JWT token
 export const generateToken = (payload: TokenPayload): string => {
   const secret = process.env.JWT_SECRET || 'fallback_secret';
-  const expiresIn = process.env.JWT_EXPIRES_IN || '7d';
+  const expiresIn = '7d';
   
   return jwt.sign(payload, secret, { expiresIn });
 };

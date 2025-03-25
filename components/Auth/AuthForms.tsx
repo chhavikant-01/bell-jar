@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { LoginForm } from './LoginForm';
 import { RegisterForm } from './RegisterForm';
 
@@ -12,7 +13,7 @@ const AuthForms: React.FC = () => {
     setIsLogin(!isLogin);
   };
   
-  const handleAuthSuccess = (data: any) => {
+  const handleAuthSuccess = () => {
     // Navigate to dashboard or movie selection after successful auth
     router.push('/dashboard');
   };

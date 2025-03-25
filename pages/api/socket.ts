@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Server as SocketIOServer } from 'socket.io';
 import { Server as NetServer } from 'http';
-import { getSocketIO, SocketNextApiRequest } from '@/lib/socket';
+import { getSocketIO } from '@/lib/socket';
 
 export const config = {
   api: {

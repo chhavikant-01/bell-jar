@@ -1,7 +1,6 @@
 "use client"
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
 
@@ -84,7 +83,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 2 }}
           >
-            "I listen to the old brag of heart, I am, I am, I am"
+            &quot;I listen to the old brag of heart, I am, I am, I am&quot;
           </motion.p>
           
           <motion.div

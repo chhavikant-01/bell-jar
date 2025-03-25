@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { io, Socket } from 'socket.io-client';
@@ -30,7 +31,6 @@ const discussionQuestions = [
 
 export const ChatInterface: React.FC<ChatProps> = ({
   chatRoomId,
-  movieId,
   movieTitle,
   onEndChat,
 }) => {
@@ -526,7 +526,7 @@ export const ChatInterface: React.FC<ChatProps> = ({
         )}
         {canEndChat ? (
           <p className="text-xs text-green-600 dark:text-green-400 mt-1">
-            You've discussed enough topics! You can end the chat or continue talking.
+            You&apos;ve discussed enough topics! You can end the chat or continue talking.
           </p>
         ) : (
           <p className="text-xs text-gray-500 mt-1">

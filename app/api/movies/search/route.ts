@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { searchMovies } from '@/lib/tmdb';
-import { getUserFromToken } from '@/lib/auth';
 
 export async function GET(request: NextRequest) {
   try {
     // Get the authorization header
-    const authHeader = request.headers.get('authorization') || undefined;
+    // const authHeader = request.headers.get('authorization') || undefined;
     
     // Verify authentication (optional for search, but will be used for tracking)
-    const user = await getUserFromToken(authHeader);
+    // const user = await getUserFromToken(authHeader);
     
     // Get query from URL parameters
     const { searchParams } = new URL(request.url);

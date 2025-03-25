@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-require-imports */
 import { Server as SocketIOServer } from 'socket.io';
 import { Server as NetServer } from 'http';
 import { NextApiRequest } from 'next';
 import { redis } from './redis';
 import { verifyToken } from './auth';
-import { ChatMessage } from './chat';
 
 // Extended NextAPI request with socket server
 export interface SocketNextApiRequest extends Omit<NextApiRequest, 'socket'> {

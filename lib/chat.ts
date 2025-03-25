@@ -246,6 +246,7 @@ export const endChatSession = async (
           return `[${date}] ${msg.username}: ${msg.text}`;
         }
       } catch (err) {
+        console.error('Error parsing message:', err);
         return `[Error parsing message]`;
       }
     }).reverse().join('\n');

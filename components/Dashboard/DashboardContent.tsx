@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -47,6 +48,7 @@ const DashboardContent: React.FC = () => {
       } catch (e) {
         localStorage.removeItem('belljar_user');
         localStorage.removeItem('belljar_token');
+        console.error('Error parsing user data:', e);
         router.push('/auth');
       }
     }
