@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -119,4 +120,134 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Custom Bell Jar Styles */
+
+@font-face {
+  font-family: 'BellJar';
+  src: url('/fonts/VCR_OSD_MONO.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+.dark .glass-card {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Neon text effect */
+.neon-text {
+  text-shadow: 
+    0 0 5px rgba(255, 0, 255, 0.7),
+    0 0 10px rgba(255, 0, 255, 0.5),
+    0 0 20px rgba(255, 0, 255, 0.3);
+}
+
+/* VHS Scanlines */
+.scanlines::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 1px,
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 3px
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.dark .scanlines::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 1px,
+    rgba(255, 255, 255, 0.03) 2px,
+    rgba(255, 255, 255, 0.03) 3px
+  );
+}
+
+/* CRT flicker animation */
+@keyframes flicker {
+  0% {
+    opacity: 0.8;
+  }
+  5% {
+    opacity: 0.85;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  25% {
+    opacity: 0.75;
+  }
+  30% {
+    opacity: 0.9;
+  }
+  35% {
+    opacity: 0.7;
+  }
+  40% {
+    opacity: 0.85;
+  }
+  45% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 0.95;
+  }
+  60% {
+    opacity: 0.85;
+  }
+  65% {
+    opacity: 0.9;
+  }
+  70% {
+    opacity: 0.7;
+  }
+  75% {
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.95;
+  }
+  85% {
+    opacity: 0.9;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  95% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+.crt-effect {
+  animation: flicker 10s infinite;
 }

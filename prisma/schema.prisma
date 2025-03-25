@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String           @id @default(uuid())
+  username       String           @unique
+  password       String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  preferences    UserPreference[]
+  activeChats    ActiveChat[]     @relation("UserActiveChats")
+}
+
+model UserPreference {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  movieId     Int
+  movie       Movie    @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  likeScore   Int      @default(0)
+  genres      String[]
+  keywords    String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  encryptedData String?
+
+  @@unique([userId, movieId])
+}
+
+model Movie {
+  id              Int              @id
+  title           String
+  posterPath      String?
+  releaseDate     DateTime?
+  overview        String?
+  genres          String[]
+  userPreferences UserPreference[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model ActiveChat {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation("UserActiveChats", fields: [userId], references: [id], onDelete: Cascade)
+  chatRoomId  String
+  movieId     Int
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([userId, chatRoomId])
+}
