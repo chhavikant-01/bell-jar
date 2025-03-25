@@ -70,12 +70,14 @@ export const ChatInterface: React.FC<ChatProps> = ({
       path: '/api/socket',
       autoConnect: true,
       reconnection: true,
-      reconnectionAttempts: 10,
-      reconnectionDelay: 1000,
-      reconnectionDelayMax: 5000,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 2000,
+      reconnectionDelayMax: 10000,
       timeout: 20000,
-      // Using only polling for better reliability
-      transports: ['polling']
+      // Only use polling transport for Vercel compatibility
+      transports: ['polling'],
+      // Force a new connection each time to avoid stale connections
+      forceNew: true
     });
 
     // Setup connection event handlers

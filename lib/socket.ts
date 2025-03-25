@@ -5,6 +5,7 @@ import { Server as NetServer } from 'http';
 import { NextApiRequest } from 'next';
 import { redis } from './redis';
 import { verifyToken } from './auth';
+import { createAdapter } from '@socket.io/redis-adapter';
 
 // Extended NextAPI request with socket server
 export interface SocketNextApiRequest extends Omit<NextApiRequest, 'socket'> {
@@ -26,20 +27,30 @@ export const getSocketIO = (req: SocketNextApiRequest) => {
     
     console.log("Creating new Socket.IO server instance");
     
+    // Create Redis clients for adapter
+    const pubClient = redis.duplicate();
+    const subClient = redis.duplicate();
+    
     // Create a new Socket.IO server
     const io = new SocketIOServer(req.socket.server, {
       path: '/api/socket',
       transports: ['polling'],
       cors: {
         origin: '*',
-        methods: ['GET', 'POST'],
+        methods: ['GET', 'POST', 'OPTIONS'],
+        credentials: true,
       },
       connectTimeout: 10000,
-      pingTimeout: 30000,
-      pingInterval: 10000
+      pingTimeout: 5000,
+      pingInterval: 10000,
+      upgradeTimeout: 5000, 
+      allowUpgrades: false, // Disable WebSocket upgrades in serverless environment
+      cookie: false // Disable socket.io cookie in serverless environment
     });
     
-    // Setup Redis adapter for Socket.IO to enable multi-server support
+    // Set up Socket.IO Redis adapter
+    io.adapter(createAdapter(pubClient, subClient));
+    
     // Create a dedicated Redis client for pub/sub
     const redisSub = redis.duplicate();
     
